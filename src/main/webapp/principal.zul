@@ -1,0 +1,31 @@
+<window viewModel="@id('vm') @init('pe.edu.nh.mvvm.MenuViewModel')">
+	<style src="/resources/css/style.css"/>
+	
+	<hlayout spacing="0"> 
+		<menubar id="menubar" orient="vertical" autodrop="true" style="height:100%">
+			<menu label="Clientes">
+				<menupopup>
+					<menuitem label="Listado"							  
+							  onClick="@command('navigate', page='cliente.zul', titulo='Listado de Usuarios')" />
+							  
+					<menuitem label="Reportes"							  
+							  onClick="@command('navigate', page='reporte.zul', titulo='Reporte de Usuarios')" />							  
+							  
+				</menupopup>				
+			</menu>
+			<menuitem label="Acerca de..." onClick='alert("Desarrollado por New Horizons")'/>
+			<menuitem label="Salir"/>						
+		</menubar>
+		
+		<div id="container" sclass="container">
+			<vlayout id="product_list" width="100%">
+				<label class="mo_head" value="@bind(vm.titulo)"/>
+				<separator bar="true"></separator>
+				<hlayout spacing="10px">
+					<include id="dynamicContent" src="@bind(vm.fuente)"/>
+				</hlayout>
+			</vlayout>
+		</div>
+		
+	</hlayout>
+</window>

@@ -1,0 +1,97 @@
+<window>
+	<style>
+		.login-window {
+			background:#f8f9fa;
+			border-radius:5px;
+			box-shadow:0 0 10px rgba(0,0,0,1);
+		}
+		
+		.login-button{
+			background:#007bff;
+			color:white;
+			width:100%;
+			margin-top:20px;
+		}
+		
+		.reset-button{
+			background:#6c757d;
+			color:white;
+			width:100%;
+			margin-top: 10px;
+		}
+		
+		.error-message{
+			color:#dc3545;
+			margin-top:10px;			
+		}
+		
+		.centered-container {
+			height:100vh;
+			display:flex;
+			justify-content: center;
+			align-items:center;
+		}
+		
+		.centered-image{
+			display:flex;
+			justify-content:center;
+			align-items:center;
+		}
+	</style>
+	<div sclass="centered-container" height="100%" width="100%">
+		<window id="loginWin" title="Iniciar Sesión" border="normal"
+			width="500px"
+			viewModel="@id('vm') @init('pe.edu.nh.mvvm.LoginViewModel')"
+			sclass="login-window">
+			<vbox hflex="1" spacing="15px" align="center">
+				<div align="center">
+					<image class="centered-image" src="/resources/images/logo.jpg" width="150px"/>
+				</div>
+			</vbox>
+			
+			<grid width="100%">
+				<rows>
+					<row>
+						<cell sclass="row-title" align="left" width="30%">
+							Usuario:
+						</cell>
+						<cell>
+							<textbox
+								value="@bind(vm.usuario.username)"
+								placeholder="Ingrese su usuario" hflex="1" 
+							/>							
+						</cell>
+					</row>
+					<row>
+						<cell sclass="row-title" align="left" width="30%">
+							Password:
+						</cell>
+						<cell>
+							<textbox type="password"
+								value="@bind(vm.usuario.password)"
+								placeholder="Ingrese su password" hflex="1" 
+							/>							
+						</cell>
+					</row>
+				</rows>
+			</grid>
+			
+			<label sclass="error-message" value="@load(vm.mensaje)" visible="@load(not empty vm.mensaje)"/>
+			
+			<div width="100%">
+				<button label="Iniciar Sesión"
+					onClick="@command('login')"
+					sclass="login-button"/>
+				<button label="Limpiar"
+					onClick="@command('resetForm')"
+					sclass="reset-button"/>
+			</div>
+			
+			<div align="center">
+				<a href="#">¿Olvidaste tu password?</a>
+			</div>
+			
+			
+		</window>
+	</div>
+</window>

@@ -1,0 +1,73 @@
+<window id="modalDialog" title="Formulario Cliente" border="normal" width="460px"
+	position="center, center" closable="true"
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('pe.edu.nh.binding.ClienteViewModel')"
+	>
+	
+	<style src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+	
+	<div class="container">
+		<vlayout spacing="10px">
+			<div class="form-group row">
+				<label value="Nombre" class="col-sm-4 col-form-label"/>
+				<div class="col-sm-8">
+					<textbox id="nombre" value="@bind(vm.clienteSeleccionado.nombre)"
+						placeholder="Ingrese su nombre"
+						class="form-control" width="100%" />
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label value="Paterno" class="col-sm-4 col-form-label" />
+				<div class="col-sm-8">
+					<textbox id="paterno" value="@bind(vm.clienteSeleccionado.apePaterno)"
+						placeholder="Apellido Paterno"
+						class="form-control" width="100%" />
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label value="Materno" class="col-sm-4 col-form-label" />
+				<div class="col-sm-8">
+					<textbox id="materno" value="@bind(vm.clienteSeleccionado.apeMaterno)"
+						placeholder="Apellido Materno"
+						class="form-control" width="100%" />
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label value="Telefono" class="col-sm-4 col-form-label" />
+				<div class="col-sm-8">
+					<textbox id="telefono" value="@bind(vm.clienteSeleccionado.telefono)"
+						placeholder="Edad"
+						class="form-control" width="100%" />
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label value="Direccion" class="col-sm-4 col-form-label" />
+				<div class="col-sm-8">
+					<textbox id="direccion" value="@bind(vm.clienteSeleccionado.direccion)"
+						placeholder="Direccion"
+						class="form-control" width="100%" />
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<div class="col-sm-6">
+					<button label="Grabar"
+						onClick="@command('grabar')"
+						class="btn btn-primary btn-lg"
+					 />
+				</div>
+				<div class="col-sm-6">
+					<button label="Cerrar"
+						onClick="@command('cerrarModal')"
+						class="btn btn-secondary btn-lg"
+					 />
+				</div>
+			</div>
+		</vlayout>
+	</div>
+
+</window>
