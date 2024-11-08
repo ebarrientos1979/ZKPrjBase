@@ -61,16 +61,25 @@ public class ClienteViewModel {
 	@GlobalCommand
 	@NotifyChange("clienteList")
 	public void refrescarListaClientes(@BindingParam("cliente") ClienteDTO cliente) {
-		ModelMapperConfig.copyProperties(cliente, this.selected);
+		init(cliente);
+		//ModelMapperConfig.copyProperties(cliente, this.selected);
 	}
 	
 	@Command
 	public void grabar() {
-		Map<String, Object> parametro = new HashMap<>();		
-		parametro.put("cliente", miSeleccionado);
-		BindUtils.postGlobalCommand(null, null, "refrescarListaClientes", parametro);
-		this.cerrarModal();
+		RestCliente rc = new RestCliente();
+		try {
+			ClienteDTO response = rc.grabarCliente(miSeleccionado);
+			Map<String, Object> parametro = new HashMap<>();		
+			parametro.put("cliente", miSeleccionado);
+			BindUtils.postGlobalCommand(null, null, "refrescarListaClientes", parametro);
+			this.cerrarModal();
+		}catch(Exception e) {
+			System.out.println(e.getStackTrace());
+		}
 	}
+	
+	
 	
 	@Command
 	public void cerrarModal() {
@@ -87,6 +96,21 @@ public class ClienteViewModel {
 		
 		Map<String, Object> parametros = new HashMap<>();
 		parametros.put("cliente", cliente);
+		
+		
+		Window window = (Window) Executions.
+							createComponents("/cliente_modal.zul", null, parametros);		
+		
+		window.doModal();
+	}
+	
+	
+	@Command	
+	public void nuevoCliente( ) {
+				
+		
+		Map<String, Object> parametros = new HashMap<>();
+		parametros.put("cliente", new ClienteDTO());
 		
 		
 		Window window = (Window) Executions.

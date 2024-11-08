@@ -13,6 +13,7 @@ import pe.edu.nh.model.UsuarioDTO;
 public class LoginViewModel {
 	private UsuarioDTO usuario = new UsuarioDTO();
 	private String mensaje;
+	private String selectedLanguage = "es";
 	
 	public UsuarioDTO getUsuario() {return usuario;}
 	public void setUsuario(UsuarioDTO usuario) { this.usuario = usuario;}
@@ -41,9 +42,23 @@ public class LoginViewModel {
 		BindUtils.postNotifyChange(null, null, this, "mensaje");
 	}
 	
+	public void setSelectedLanguage(String sl) {
+		this.selectedLanguage = sl;
+	}
+	
+	public String getSelectedLanguage() {
+		return this.selectedLanguage;
+	}
+	
 	private boolean validarCredenciales(String username, String password) {
 		//Aqui llamamos a nuestra API REST
 		return "admin".equals(username) && "admin123".equals(password);
+	}
+	
+	
+	@Command
+	public void changeLocal() {
+		
 	}
 	
 }
