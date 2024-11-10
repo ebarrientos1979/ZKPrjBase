@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import pe.edu.nh.dto.ClienteDTO;
+import pe.edu.nh.dto.Respuesta;
 
 public class RestCliente {
 	private String url= "http://localhost:8065/v1/cliente/";
@@ -90,6 +91,49 @@ public class RestCliente {
 				
 				return gson.fromJson(response.toString(),
 							new TypeToken<ClienteDTO>() {}.getType()
+						);
+			}			
+			
+		}else {
+			System.out.println("ERROR AL LLAMAR AL METODO POST " + responseCode );			
+		}
+		
+		return null;
+	}
+	
+	public Respuesta eliminarCliente(ClienteDTO cliente) throws MalformedURLException, IOException {
+		ClienteDTO clienteRespuesta;
+		this.url += "delete";		
+		this.conectarREST();
+		
+		this.connection.setRequestMethod("DELETE");
+		this.connection.setRequestProperty("Accept", "application/json");
+		this.connection.setRequestProperty("Content-Type",  "application/json");
+		this.connection.setDoOutput(true);
+		
+		Gson gson = new Gson();
+		String jsonInputString = gson.toJson(cliente);	
+		
+
+		try (OutputStream os = this.connection.getOutputStream()){
+			byte[] input =  jsonInputString.getBytes("utf-8");
+			os.write(input,0, input.length);
+		}
+		
+		int responseCode = this.connection.getResponseCode();
+				
+		if(responseCode == HttpURLConnection.HTTP_OK) {
+			try(BufferedReader br = new BufferedReader(
+					new InputStreamReader(this.connection.getInputStream(), "utf-8"))){
+				StringBuilder response = new StringBuilder();
+				String responseLine;
+				//Mientras haya bits en el buffer de lectura
+				while((responseLine = br.readLine()) != null) {
+					response.append(responseLine.trim());
+				}
+				
+				return gson.fromJson(response.toString(),
+							new TypeToken<Respuesta>() {}.getType()
 						);
 			}			
 			

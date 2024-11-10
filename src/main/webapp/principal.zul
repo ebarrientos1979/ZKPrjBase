@@ -8,8 +8,8 @@
 					<menuitem label="Listado"							  
 							  onClick="@command('navigate', page='cliente.zul', titulo='Listado de Usuarios')" />
 							  
-					<menuitem label="Reportes"							  
-							  onClick="@command('navigate', page='reporte.zul', titulo='Reporte de Usuarios')" />							  
+					<menuitem label="Dinamico"							  
+							  onClick="@command('navigate', page='dinamico.zul', titulo='Formulario Dinamico')" />							  
 							  
 				</menupopup>				
 			</menu>

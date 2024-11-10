@@ -1,0 +1,15 @@
+<zk xmlns:n="native">
+	<window title="Formulario Dinamico" border="normal" width="400px"
+		viewModel="@id('vm') @init('pe.edu.nh.binding.DynamicFormViewModel')">
+		<grid>
+			<rows>
+				<template name="formularioDTO" var="campo">
+					<row>
+						<label value="@load(campo.label)"/>
+					</row>				
+				</template>			
+			</rows>
+		
+		</grid>		
+	</window>
+</zk>

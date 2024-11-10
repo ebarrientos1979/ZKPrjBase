@@ -45,7 +45,24 @@
 					<label value="@load(cliente.direccion)"></label>
 					<button
 						class="btn btn-danger bi bi-trash"
-						onClick="@command('grabar')"  />
+						onClick='@command("eliminarCliente", cliente=cliente)' >
+						<attribute name="onClick">
+							<![CDATA[
+							     Messagebox.show("Esta seguro de eliminar?","Question",
+							    		 Messagebox.OK | Messagebox.NO, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener(){
+							    	 public void onEvent(Event evt) throws InterruptedException{
+							    		 if(evt.getName().equals("onOK")){
+							    			 System.out.println("YES");
+							    		 }else{
+							    			 System.out.println("NO");
+							    		 }
+							    	 }
+							     });
+							]]>
+						</attribute>
+					</button>
+						
+					
 				</row>
 			</template>
 		</rows>

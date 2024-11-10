@@ -2,6 +2,7 @@ package pe.edu.nh.binding;
 
 import pe.edu.nh.ModelMapperConfig;
 import pe.edu.nh.dto.ClienteDTO;
+import pe.edu.nh.dto.Respuesta;
 import pe.edu.nh.rest.RestCliente;
 
 import java.util.*;
@@ -102,6 +103,26 @@ public class ClienteViewModel {
 							createComponents("/cliente_modal.zul", null, parametros);		
 		
 		window.doModal();
+	}
+	
+	@Command
+	public void eliminarCliente(@BindingParam("cliente") ClienteDTO cliente) {	
+		RestCliente rc = new RestCliente();
+		try {
+			Respuesta response = rc.eliminarCliente( cliente );
+			
+			if(response.getValor() == 1) {
+				Map<String, Object> parametro = new HashMap<>();		
+				parametro.put("cliente", cliente);
+				BindUtils.postGlobalCommand(null, null, "refrescarListaClientes", parametro);				
+			}else {
+				System.out.println(response.getMensaje());
+			}			
+			
+			
+		}catch(Exception e) {
+			System.out.println(e.getStackTrace());
+		}
 	}
 	
 	
