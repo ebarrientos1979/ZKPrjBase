@@ -1,8 +1,13 @@
 package pe.edu.nh.mvvm;
 
+import java.util.Locale;
+
+import org.zkoss.web.Attributes;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.util.Locales;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -13,12 +18,21 @@ import pe.edu.nh.model.UsuarioDTO;
 public class LoginViewModel {
 	private UsuarioDTO usuario = new UsuarioDTO();
 	private String mensaje;
-	private String selectedLanguage = "es";
+	private String selectedLanguage;
 	
 	public UsuarioDTO getUsuario() {return usuario;}
 	public void setUsuario(UsuarioDTO usuario) { this.usuario = usuario;}
 	public String getMensaje() {return mensaje;}
 	public void setMensaje(String mensaje) {this.mensaje = mensaje;}
+	
+	@Init
+	public void init() {
+		selectedLanguage = (String) Sessions.getCurrent().getAttribute("preferred_language");
+		if(selectedLanguage == null) {
+			selectedLanguage = "es";
+			changeLocale();
+		}
+	}
 	
 	@Wire
 	private Window loginWin;
@@ -57,8 +71,12 @@ public class LoginViewModel {
 	
 	
 	@Command
-	public void changeLocal() {
-		
+	public void changeLocale() {
+		Locale locale = new Locale(this.selectedLanguage);
+		Sessions.getCurrent().setAttribute(Attributes.PREFERRED_LOCALE, locale);
+		Sessions.getCurrent().setAttribute("preferred_language", this.selectedLanguage);
+		Executions.sendRedirect(null);
+		//Locales.setThreadLocal(locale);
 	}
 	
 }

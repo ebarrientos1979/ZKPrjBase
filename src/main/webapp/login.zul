@@ -1,3 +1,4 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <window>
 	<style>
 		.login-window { background:#f8f9fa; border-radius:5px;
@@ -18,7 +19,7 @@
 		align-items:center; }
 	</style>
 	<div sclass="centered-container" height="100%" width="100%">
-		<window id="loginWin" title="Iniciar Sesión" border="normal"
+		<window id="loginWin" title="${c:l('login.title')}" border="normal"
 			width="500px"
 			viewModel="@id('vm') @init('pe.edu.nh.mvvm.LoginViewModel')"
 			sclass="login-window">
@@ -33,23 +34,23 @@
 						<row>
 							<cell sclass="row-title" align="left"
 								width="30%">
-								Usuario:
+								${c:l('login.user')}:
 							</cell>
 							<cell>
 								<textbox
 									value="@bind(vm.usuario.username)"
-									placeholder="Ingrese su usuario" hflex="1" />
+									placeholder="${c:l('login.user.placeholder')}" hflex="1" />
 							</cell>
 						</row>
 						<row>
 							<cell sclass="row-title" align="left"
 								width="30%">
-								Password:
+								${c:l('login.password')}:
 							</cell>
 							<cell>
 								<textbox type="password"
 									value="@bind(vm.usuario.password)"
-									placeholder="Ingrese su password" hflex="1" />
+									placeholder="${c:l('login.password.placeholder')}" hflex="1" />
 							</cell>
 						</row>
 					</rows>
@@ -59,18 +60,18 @@
 					visible="@load(not empty vm.mensaje)" />
 
 				<div width="100%">
-					<button label="Iniciar Sesión"
+					<button label="${c:l('login.button.login')}"
 						onClick="@command('login')" sclass="login-button" />
-					<button label="Limpiar"
+					<button label="${c:l('login.button.clean')}"
 						onClick="@command('resetForm')" sclass="reset-button" />
 				</div>
 
 				<div align="center">
-					<a href="#">¿Olvidaste tu password?</a>
+					<a href="#">${c:l('login.link.forget')}</a>
 				</div>
 				
 				<div sclass="language-selector">
-					<label value="Seleccione su Idioma"/>
+					<label value="${c:l('login.label.choose')}"/>
 					<combobox id="langCombo"
 						selectedItem="@bind(vm.selectedLanguage)"
 						onSelect="@command('changeLocale')">

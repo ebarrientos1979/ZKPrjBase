@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<zk>
+	<system-config>
+		<properties-config>
+			<enconding>UTF-8</enconding>
+		</properties-config>
+		<label-location>/WEB-INF/labels/zk-label.properties</label-location>				
+	</system-config>
+</zk>

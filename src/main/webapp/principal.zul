@@ -1,20 +1,21 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <window viewModel="@id('vm') @init('pe.edu.nh.mvvm.MenuViewModel')">
 	<style src="/resources/css/style.css"/>
 	
 	<hlayout spacing="0"> 
 		<menubar id="menubar" orient="vertical" autodrop="true" style="height:100%">
-			<menu label="Clientes">
+			<menu label="${c:l('menu.clientes')}">
 				<menupopup>
-					<menuitem label="Listado"							  
+					<menuitem label="${c:l('menu.clientes.listado')}"							  
 							  onClick="@command('navigate', page='cliente.zul', titulo='Listado de Usuarios')" />
 							  
-					<menuitem label="Dinamico"							  
+					<menuitem label="${c:l('menu.clientes.dinamico')}"							  
 							  onClick="@command('navigate', page='dinamico.zul', titulo='Formulario Dinamico')" />							  
 							  
 				</menupopup>				
 			</menu>
-			<menuitem label="Acerca de..." onClick='alert("Desarrollado por New Horizons")'/>
-			<menuitem label="Salir"/>						
+			<menuitem label="${c:l('menu.acercade')}" onClick='alert("Desarrollado por New Horizons")'/>
+			<menuitem label="${c:l('menu.salir')}"/>						
 		</menubar>
 		
 		<div id="container" sclass="container">
