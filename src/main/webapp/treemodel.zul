@@ -1,0 +1,9 @@
+<window title="Tree Model" width="400px" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('pe.edu.nh.mvvm.TreeViewModel')"
+>
+	<tree model="@bind(vm.treeModel)" height="400px">
+		<treecols>
+			<treecol label="Nombre del Item"/>
+		</treecols>
+	</tree>
+</window>

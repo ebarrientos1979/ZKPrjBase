@@ -32,9 +32,16 @@ public class FormularioDTO {
 
 
 	
-	public FormularioDTO(String label, String type) {
+	public FormularioDTO(String label, String type){//, Object value) {
 		this.label = label;
 		this.type = type;
+		//this.value = value;
+	}
+	
+	public FormularioDTO(String label, String type, Object value) {
+		this.label = label;
+		this.type = type;
+		this.value = value;
 	}
 	
 	

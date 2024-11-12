@@ -1,15 +1,27 @@
 <zk xmlns:n="native">
-	<window title="Formulario Dinamico" border="normal" width="400px"
+	<window title="Formulario Dinamico" border="normal" width="800px"
 		viewModel="@id('vm') @init('pe.edu.nh.binding.DynamicFormViewModel')">
-		<grid>
-			<rows>
-				<template name="formularioDTO" var="campo">
-					<row>
-						<label value="@load(campo.label)"/>
-					</row>				
-				</template>			
-			</rows>
-		
+		<grid model="@load(vm.campos)">
+			<template name="model" var="campo">
+				<row>
+					<label value="@load(campo.label)"/>
+					<div>
+						<label value="@load(campo.type)"></label>
+						
+						<textbox visible="@load(vm.isText(campo.type))"
+							value="@load(campo.value)" width="100%"/>
+							
+						<intbox visible="@load(vm.isNumber(campo.type))"
+							value="@load(campo.value)" width="100%"/>
+							
+						<datebox visible="@load(vm.isDate(campo.type))"
+							value="@load(campo.value)" width="100%"/>
+							
+						<checkbox visible="@load(vm.isBoolean(campo.type))"
+							value="@load(campo.value)" />																					
+					</div>
+				</row>
+			</template>		
 		</grid>		
 	</window>
 </zk>

@@ -16,6 +16,8 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 public class ClienteViewModel {	
@@ -108,21 +110,30 @@ public class ClienteViewModel {
 	@Command
 	public void eliminarCliente(@BindingParam("cliente") ClienteDTO cliente) {	
 		RestCliente rc = new RestCliente();
-		try {
-			Respuesta response = rc.eliminarCliente( cliente );
-			
-			if(response.getValor() == 1) {
-				Map<String, Object> parametro = new HashMap<>();		
-				parametro.put("cliente", cliente);
-				BindUtils.postGlobalCommand(null, null, "refrescarListaClientes", parametro);				
-			}else {
-				System.out.println(response.getMensaje());
-			}			
-			
-			
-		}catch(Exception e) {
-			System.out.println(e.getStackTrace());
-		}
+		
+		Messagebox.show("¿Esta seguro de eliminar?", "Confirmacion",
+				Messagebox.OK | Messagebox.NO, Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
+					public void onEvent(Event evt) throws InterruptedException{
+						if (evt.getName().equals("onOK")) {
+							try {
+								Respuesta response = rc.eliminarCliente( cliente );
+								
+								if(response.getValor() == 1) {
+									Map<String, Object> parametro = new HashMap<>();		
+									parametro.put("cliente", cliente);
+									BindUtils.postGlobalCommand(null, null, "refrescarListaClientes", parametro);				
+								}else {
+									System.out.println(response.getMensaje());
+								}			
+								
+								
+							}catch(Exception e) {
+								System.out.println(e.getStackTrace());
+							}
+						}
+					}
+			});
 	}
 	
 	
