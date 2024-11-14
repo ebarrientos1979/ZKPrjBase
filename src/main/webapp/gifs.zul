@@ -1,5 +1,18 @@
 <window border="none" apply="org.zkoss.bind.BindComposer" 
 	viewModel="id('vm') @init('pe.edu.nh.mvvm.GifsViewModel')">	
+	<style>
+		.grid {
+	    	display: grid;
+	    	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	    	gap: 10px;
+		}
+		
+		.grid img {
+		    width: 100%;
+		    height: auto;
+		    display: block;
+		} 
+	</style>
 	<grid>
 		<columns>
 			<column width="60%"></column>
@@ -11,7 +24,19 @@
 					 width="100%" onChange="@command('buscarImagen')" />
 				<button label="Busqueda"  />
 			</row>
-		</rows>
+		</rows>		
+	</grid>
 
+	<grid model="@load(vm.data)" class="grid">
+		<columns>
+			<column label="Col1" width="25%" />			
+		</columns>
+		<rows>
+			<template name="model" var="dato" >				
+				<row>
+					<image src="@load(dato.images.original.url)" width="25%" height="25%"></image>					
+				</row>
+			</template>
+		</rows>
 	</grid>
 </window>

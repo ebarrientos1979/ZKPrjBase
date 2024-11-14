@@ -15,6 +15,7 @@ import com.google.gson.reflect.TypeToken;
 
 import pe.edu.nh.dto.ClienteDTO;
 import pe.edu.nh.dto.Respuesta;
+import pe.edu.nh.model.gif.*;
 
 public class RestCliente {
 	private String url= "http://localhost:8065/v1/cliente/";
@@ -22,6 +23,41 @@ public class RestCliente {
 	
 	public void conectarREST() throws MalformedURLException, IOException {
 		this.connection =  (HttpURLConnection) new URL(this.url).openConnection();
+	}
+	
+	public Root getImages(String campo) throws MalformedURLException, IOException{
+		Root root = new Root();
+		this.url = "https://api.giphy.com/v1/gifs/search?limit=10&api_key=qeasCWE1IA3NB4yvdR55kXnAuH69Engk&q=" + campo;
+		
+		this.conectarREST();
+		
+		this.connection.setRequestMethod("GET");
+				
+		
+		int responseCode = this.connection.getResponseCode();
+		if(responseCode == HttpURLConnection.HTTP_OK) {
+			BufferedReader in = new BufferedReader( new InputStreamReader( 
+					this.connection.getInputStream() ));
+			String inputLine;
+			StringBuilder response = new StringBuilder();
+			while((inputLine = in.readLine()) != null) {				
+				response.append(inputLine);
+			}
+			
+			in.close();
+			
+			Gson gson = new Gson();
+			root = gson.fromJson(response.toString(), 
+					new TypeToken<Root>(){}.getType());
+			System.out.println(root.getData().size());
+		}else {
+			System.out.println(responseCode);
+			System.out.println(this.url);
+			System.out.println("ERROR AL LLAMAR AL METODO GET EN GIFS");			
+		}
+		
+		return root;
+		
 	}
 
 	
