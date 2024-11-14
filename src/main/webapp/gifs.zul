@@ -1,0 +1,17 @@
+<window border="none" apply="org.zkoss.bind.BindComposer" 
+	viewModel="id('vm') @init('pe.edu.nh.mvvm.GifsViewModel')">	
+	<grid>
+		<columns>
+			<column width="60%"></column>
+			<column width="40%"></column>
+		</columns>
+		<rows>
+			<row>
+				<textbox placeholder="Ingrese el nombre" value="@bind(vm.nombreImagen)"
+					 width="100%" onChange="@command('buscarImagen')" />
+				<button label="Busqueda"  />
+			</row>
+		</rows>
+
+	</grid>
+</window>

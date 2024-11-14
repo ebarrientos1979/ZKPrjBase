@@ -12,6 +12,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Window;
+import org.zkoss.zk.ui.util.Clients;
 
 import pe.edu.nh.model.UsuarioDTO;
 
@@ -27,6 +28,8 @@ public class LoginViewModel {
 	
 	@Init
 	public void init() {
+		String script = String.format("localStorage.setItem('%s','%s');", "PRUEBA", "DATOS");
+		Clients.evalJavaScript(script);
 		selectedLanguage = (String) Sessions.getCurrent().getAttribute("preferred_language");
 		if(selectedLanguage == null) {
 			selectedLanguage = "es";

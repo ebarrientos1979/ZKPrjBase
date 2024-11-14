@@ -23,6 +23,7 @@ public class RestCliente {
 	public void conectarREST() throws MalformedURLException, IOException {
 		this.connection =  (HttpURLConnection) new URL(this.url).openConnection();
 	}
+
 	
 	public List<ClienteDTO> ListarClientes() throws MalformedURLException, IOException{
 		List<ClienteDTO> clientes = new ArrayList<ClienteDTO>();
