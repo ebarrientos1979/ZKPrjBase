@@ -27,7 +27,7 @@ public class RestCliente {
 	
 	public Root getImages(String campo) throws MalformedURLException, IOException{
 		Root root = new Root();
-		this.url = "https://api.giphy.com/v1/gifs/search?limit=10&api_key=qeasCWE1IA3NB4yvdR55kXnAuH69Engk&q=" + campo;
+		this.url = "https://api.giphy.com/v1/gifs/search?limit=30&api_key=qeasCWE1IA3NB4yvdR55kXnAuH69Engk&q=" + campo;
 		
 		this.conectarREST();
 		
