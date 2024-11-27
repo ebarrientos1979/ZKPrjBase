@@ -6,19 +6,14 @@
 				<row>
 					<label value="@load(campo.label)"/>
 					<div>
-						<label value="@load(campo.type)"></label>
-						
-						<textbox visible="@load(vm.isText(campo.type))"
-							value="@load(campo.value)" width="100%"/>
-							
-						<intbox visible="@load(vm.isNumber(campo.type))"
-							value="@load(campo.value)" width="100%"/>
-							
-						<datebox visible="@load(vm.isDate(campo.type))"
-							value="@load(campo.value)" width="100%"/>
-							
-						<checkbox visible="@load(vm.isBoolean(campo.type))"
-							value="@load(campo.value)" />																					
+						<textbox if="${campo.type == 'text'}"
+                    		value="@bind(campo.value)" width="100%"/>                    		
+                    	<intbox if="${campo.type == 'number'}"
+		                    value="@bind(campo.value)" width="100%"/>
+		                <datebox if="${campo.type == 'date'}"
+		                    value="@bind(campo.value)" width="100%"/>
+		                <checkbox if="${campo.type == 'boolean'}"
+		                    checked="@bind(campo.value)"/>																			
 					</div>
 				</row>
 			</template>		

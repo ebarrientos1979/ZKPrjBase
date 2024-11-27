@@ -1,0 +1,20 @@
+<zk>
+	<div>
+		<window apply="pe.edu.nh.composer.BarBasicComposer">
+    		<charts id="chart" type="bar"
+        	title="Distribución de Compra x Cliente"/>
+		</window>
+	</div>	
+	
+	<div>
+		<window apply="pe.edu.nh.composer.LineBasicComposer">
+	    	<charts id="chart" type="line" title="U.S Solar Employment Growth" />
+		</window>
+	</div>
+	
+	<div>
+		<window apply="pe.edu.nh.composer.PieBasicComposer">
+	    	<charts id="chart" type="pie" title="Compras por Cliente"/>
+		</window>
+	</div>
+</zk>

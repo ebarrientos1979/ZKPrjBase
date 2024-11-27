@@ -16,6 +16,7 @@
 			</menu>
 			<menuitem label="${c:l('menu.treemodel')}" onClick="@command('navigate', page='treemodel.zul', titulo='Tree Model')" />
 			<menuitem label="${c:l('menu.gifs')}" onClick="@command('navigate', page='gifs.zul', titulo='Busqueda Imagenes')" />
+			<menuitem label="${c:l('menu.chart')}" onClick="@command('navigate', page='chart.zul', titulo='Grafico Estadistico')" />
 			<menuitem label="${c:l('menu.acercade')}" onClick='alert("Desarrollado por New Horizons")'/>
 			<menuitem label="${c:l('menu.salir')}"/>						
 		</menubar>

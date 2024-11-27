@@ -15,10 +15,12 @@ public class DynamicFormViewModel {
 	@Init
 	public void init() {
 		campos = new ArrayList<>();
-		campos.add(new FormularioDTO("Nombre", "text", "PRUEBA"));
-		campos.add(new FormularioDTO("Edad", "number"));
-		campos.add(new FormularioDTO("Fecha de Nacimiento", "date"));
-		campos.add(new FormularioDTO("Es correcto?", "boolean"));
+		campos.add(new FormularioDTO("Nombre", "text", "EDWIN"));
+		campos.add(new FormularioDTO("Ap. Paterno", "text", "BARRIENTOS"));
+		campos.add(new FormularioDTO("Ap. Materno", "text", "RETUERTO"));
+		campos.add(new FormularioDTO("Edad", "number", Integer.valueOf(100)));
+		campos.add(new FormularioDTO("Fecha de Nacimiento", "date", new Date()));
+		campos.add(new FormularioDTO("Es correcto?", "boolean", Boolean.valueOf(true)));
 	}
 	
 	public List<FormularioDTO> getCampos(){
@@ -32,28 +34,6 @@ public class DynamicFormViewModel {
 		}
 	
 		Messagebox.show(data.toString(), "Formulario Enviado", Messagebox.OK, Messagebox.INFORMATION);
-	}
-	
-		
-	public boolean isText(String tipo){
-		//System.out.println("texto - " + campo.getLabel() + " - " + campo.getType() + "text".equals(campo.getType()));
-		return "text".equals(tipo);
-	}
-	
-	public boolean isNumber(String tipo){
-		System.out.println(tipo);
-		//System.out.println("number - " + campo.getLabel() + " - " + campo.getType() + "number".equals(campo.getType()));
-		return "number".equals(tipo);
-	}
-	
-	public boolean isDate(String tipo){
-		//System.out.println("date - " + campo.getLabel() + " - " + campo.getType() + "date".equals(campo.getType()));
-		return "date".equals(tipo);
-	}
-	
-	public boolean isBoolean(String tipo){
-		//System.out.println("boolean - " + campo.getLabel() + " - " + campo.getType() + "boolean".equals(campo.getType()));
-		return "boolean".equals(tipo);
-	}
+	}	
 
 }
