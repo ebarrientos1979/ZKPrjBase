@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import pe.edu.nh.dto.ClienteDTO;
+import pe.edu.nh.dto.FormularioDTO;
 import pe.edu.nh.dto.Respuesta;
 import pe.edu.nh.model.gif.*;
 
@@ -90,10 +91,8 @@ public class RestCliente {
 			
 		}else {
 			System.out.println("ERROR AL LLAMAR AL METODO GET");			
-		}
-		
-		return clientes;
-		
+		}		
+		return clientes;		
 	}
 	
 	public ClienteDTO grabarCliente(ClienteDTO cliente) throws MalformedURLException, IOException {
@@ -179,5 +178,39 @@ public class RestCliente {
 		}
 		
 		return null;
+	}
+	
+	
+	public List<FormularioDTO> getFormulario(int idFormulario) throws MalformedURLException, IOException{
+		List<FormularioDTO> formularios = new ArrayList<FormularioDTO>();
+		this.url = "http://localhost:8065/v1/formulario/getDatos?idFormulario=" + String.valueOf(idFormulario);		
+		this.conectarREST();
+		
+		this.connection.setRequestMethod("GET");
+		this.connection.setRequestProperty("Accept", "application/json");
+		
+		int responseCode = this.connection.getResponseCode();
+				
+		if(responseCode == HttpURLConnection.HTTP_OK) {
+			BufferedReader in = new BufferedReader( new InputStreamReader( 
+					this.connection.getInputStream() ));
+						
+			String inputLine;
+			StringBuilder response = new StringBuilder();
+			
+			while((inputLine = in.readLine()) != null) {				
+				response.append(inputLine);
+			}
+			
+			in.close();
+			
+			Gson gson = new Gson();
+			formularios = gson.fromJson(response.toString(), 
+					new TypeToken<List<FormularioDTO>>(){}.getType());
+			
+		}else {
+			System.out.println("ERROR AL LLAMAR AL METODO GET");			
+		}		
+		return formularios;		
 	}
 }

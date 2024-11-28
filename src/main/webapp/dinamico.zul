@@ -1,22 +1,64 @@
 <zk xmlns:n="native">
+	<zscript>
+		<![CDATA[
+		         int[] formularios = {1,2}
+		]]>
+	</zscript>
 	<window title="Formulario Dinamico" border="normal" width="800px"
-		viewModel="@id('vm') @init('pe.edu.nh.binding.DynamicFormViewModel')">
+		viewModel="@id('vm') @init('pe.edu.nh.binding.DynamicFormViewModel')"		
+		>
+		<grid>
+			<rows>
+				<row>
+					<bandbox id="bd" mold="rounded" autodrop="true" 
+							value="@bind(idFormulario)">
+						<bandpopup>
+							<listbox height="250px" width="450px" mold="paging" 
+								autopaging="true"
+								onSelect='bd.value=self.selectedItem.label; bd.close();'>
+								<listhead>
+									<listheader label="Numero Form"></listheader>
+								</listhead>
+								<listitem label="${each}" forEach="${formularios}"/>
+							</listbox>
+						</bandpopup>
+					</bandbox>					
+				</row>
+			</rows>			
+		</grid>
 		<grid model="@load(vm.campos)">
 			<template name="model" var="campo">
 				<row>
 					<label value="@load(campo.label)"/>
 					<div>
-						<textbox if="${campo.type == 'text'}"
-                    		value="@bind(campo.value)" width="100%"/>                    		
-                    	<intbox if="${campo.type == 'number'}"
-		                    value="@bind(campo.value)" width="100%"/>
-		                <datebox if="${campo.type == 'date'}"
-		                    value="@bind(campo.value)" width="100%"/>
-		                <checkbox if="${campo.type == 'boolean'}"
-		                    checked="@bind(campo.value)"/>																			
+						<textbox if="${campo.tipo == 'text'}"
+                    		value="@bind(campo.valor)" width="100%"/>                    		
+                    	<decimalbox if="${campo.tipo == 'number'}"
+		                    value="@bind(campo.valor)" format="#,##0.00" width="100%"/>
+		                <datebox if="${campo.tipo == 'date'}"
+		                    value="@bind(campo.valor)" width="100%"/>
+		                <checkbox if="${campo.tipo == 'boolean'}"
+		                    checked="@bind(campo.valor)"/>																			
 					</div>
-				</row>
+				</row>				
 			</template>		
+		</grid>	
+		<grid>
+			<rows>					
+				<row>							
+					<button
+						label="Cambiar Formulario"
+						class="btn btn-danger bi bi-trash"
+						onClick='@command("selFormulario", idFormulario = bd.value)' >						
+					</button>
+					
+					<button
+						label="Grabar"
+						class="btn btn-primary bi bi-trash"
+						onClick='@command("submitForm")' >						
+					</button>
+				</row>					
+			</rows>
 		</grid>		
 	</window>
 </zk>
